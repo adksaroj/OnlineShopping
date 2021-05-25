@@ -7,6 +7,9 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -32,23 +35,35 @@
                         <li><a href="#">Item 1-3</a></li>
                     </ul>
                 </li>
-                <li>@Html.ActionLink("Products", "Index", "Product", new { area = "" }, new { @class = "" })</li>
+                <li>@Html.ActionLink("Products", "Grid", "Product", new { area = "" }, new { @class = "" })</li>
+
+
+                <li class="navbar-form" role="search">
+                    <div class="input-group w-50">
+                        <input type="text" class="form-control input-medium" placeholder="Search" name="srch-term" id="tb_SearchBox">
+                        <div class="input-group-btn">
+                            <button class="btn btn-success" type="submit" id="btn_Search" onclick="btn_Search_Click()">Search</button>
+                        </div>
+                    </div>
+                </li>
 
             </ul>
+
+
             <ul class="nav navbar-nav navbar-right">
                 @{
                     if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("admin"))
                         {
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="~/Product">Manage Products</a></li>
-                                        <li><a href="#">Item 1-2</a></li>
-                                        <li><a href="#">Item 1-3</a></li>
-                                    </ul>
-                                </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/Product">Products</a></li>
+                                    <li><a href="#">Users</a></li>
+                                    <li><a href="#">Item 1-3</a></li>
+                                </ul>
+                            </li>
                         }
                         if (User.IsInRole("user"))
                         {
@@ -79,11 +94,33 @@
         @RenderBody()
         <hr />
         <footer>
+            <h5 id="footer_Status">Ready</h5>
             <p>&copy; @DateTime.Now.Year - Saroj's Online Shopping Application</p>
         </footer>
     </div>
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        function btn_Search_Click() {
+            var uri = "/product/getjson/" + document.getElementById("tb_SearchBox").value;
+            $.ajax({
+                url: uri,
+                method: "GET",
+
+                success: function onSuccess(data) {
+                    $("#footer_Status").text(data);
+                },
+
+                error: function onError(err) {
+                    alert(err);
+                }
+
+            })
+
+        }
+    </script>
 </body>
 </html>

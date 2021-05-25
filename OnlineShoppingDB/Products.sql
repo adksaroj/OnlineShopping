@@ -6,5 +6,5 @@
     [Cost] MONEY NOT NULL, 
     [Category] NVARCHAR(50) NOT NULL, 
     [ImageName] NVARCHAR(50) NULL, 
-    [Description] NVARCHAR(200) NULL
+    [Description] NVARCHAR(2000) NULL
 )

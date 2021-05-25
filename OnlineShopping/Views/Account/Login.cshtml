@@ -1,0 +1,40 @@
+﻿@model OnlineShopping.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div id="login-div" class="h-100">
+    <div class="h-100 justify-content-center align-items-center">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+        <table>
+            <tr class="form-group">
+                <td>@Html.LabelFor(model => model.Email)</td>
+                <td><span>@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td>@Html.ValidationMessageFor(model => model.Email, "", new { htmlAttributes = new { @class = "text-danger" } })</td>
+
+            </tr>
+            <tr><td><br></td></tr>
+            <tr class="form-group">
+                <td>@Html.LabelFor(model => model.Password)</td>
+                <td><span>@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })</span></td>
+                <td>@Html.ValidationMessageFor(model => model.Password, "", new { htmlAttributes = new { @class = "text-danger" } })</td>
+
+            </tr>
+            <tr><td><br></td></tr>
+            @if (ViewBag.Error != "No Error")
+            {
+                <tr><td></td><td class="text-danger">@ViewBag.Error</td></tr>
+            }
+        </table>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        }
+    </div>
+</div>

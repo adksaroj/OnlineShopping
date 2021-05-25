@@ -1,0 +1,87 @@
+﻿@model OnlineShoppingDataAccess.Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.ProductName</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <table>
+        <tr>
+            <td class="col-md-4">
+                <div>
+                    <img class="img-thumbnail" width="800" height="800" src="@Url.Content("~/static/products/")@Model.ImageName" alt="@Model.ImageName" />
+                </div>
+            </td>
+            <td class="col-md-8">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cost)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Cost)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Category)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ImageName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ImageName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                    </dl>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-primary" } )
+                </p>
+            </td>
+        </tr>
+    </table>
+
+
+
+</div>

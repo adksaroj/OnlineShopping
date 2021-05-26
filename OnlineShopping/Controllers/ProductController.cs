@@ -40,7 +40,7 @@ namespace OnlineShopping.Controllers
         /// <returns>JSON array of all products whose name contains the words present in search query</returns>
         public JsonResult GetJson(string id)
         {
-            var keys = id.Split(' ');
+            var keys = id.Trim().Split(' ');
 
             List<Products> prods = new List<Products>();
 

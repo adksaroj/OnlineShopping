@@ -40,7 +40,8 @@
 
                 <li class="navbar-form" role="search">
                     <div class="input-group w-50">
-                        <input type="text" class="form-control input-medium" placeholder="Search" name="srch-term" id="tb_SearchBox">
+                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="tb_SearchBox">
+                        
                         <div class="input-group-btn">
                             <button class="btn btn-success" type="submit" id="btn_Search" onclick="btn_Search_Click()">Search</button>
                         </div>
@@ -105,20 +106,25 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script>
         function btn_Search_Click() {
-            var uri = "/product/getjson/" + document.getElementById("tb_SearchBox").value;
-            $.ajax({
-                url: uri,
-                method: "GET",
+            if (document.getElementById("tb_SearchBox").value.trim() !== null && document.getElementById("tb_SearchBox").value.trim() !== undefined && document.getElementById("tb_SearchBox").value.trim() !== "") {
 
-                success: function onSuccess(data) {
-                    $("#footer_Status").text(data);
-                },
+                var uri = "/product/getjson/" + document.getElementById("tb_SearchBox").value.trim();
+                $.ajax({
+                    url: uri,
+                    method: "GET",
 
-                error: function onError(err) {
-                    alert(err);
-                }
+                    success: function onSuccess(data) {
+                        $("#footer_Status").text(data);
+                    },
 
-            })
+                    error: function onError(err) {
+                        alert(err);
+                    }
+
+                })
+
+            }
+            
 
         }
     </script>

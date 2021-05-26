@@ -1,4 +1,4 @@
-﻿@model List<OnlineShoppingDataAccess.Products>
+﻿@model List<OnlineShopping.Models.CartViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,16 @@
         <tr>
             <th></th>
             <th>
-                @Html.DisplayNameFor(model => model[0].ProductName)
+                @Html.DisplayNameFor(model => model[0].product.ProductName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Category)
+                @Html.DisplayNameFor(model => model[0].product.Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Cost)
+                @Html.DisplayNameFor(model => model[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].product.Cost)
             </th>
             <th>Actions</th>
         </tr>
@@ -27,20 +30,25 @@
         {
             <tr>
                 <td>
-                    <img class="img-thumbnail img-responsive" width="150" height="300" src="@Url.Content("~/static/products/")@item.ImageName" alt="@item.ImageName" />
+                    <img class="img-thumbnail img-responsive" width="150" height="300" src="@Url.Content("~/static/products/")@item.product.ImageName" alt="@item.product.ImageName" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
+                    @Html.DisplayFor(modelItem => item.product.ProductName)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Category)
+                    @Html.DisplayFor(modelItem => item.product.Category)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.product.Cost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
-                </td>
-                <td>
-                    @Html.ActionLink("Remove from Cart", "Remove", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Remove from Cart", "Remove", new { id = item.product.Id }, htmlAttributes: new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

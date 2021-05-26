@@ -8,13 +8,13 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <style>
-
     </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
+                <i class="glyphicon glyphicon-shopping-cart navbar-brand"></i>
                 <a class="navbar-brand" href="#">Online Shopping</a>
             </div>
             <ul class="nav navbar-nav">
@@ -40,8 +40,8 @@
 
                 <li class="navbar-form" role="search">
                     <div class="input-group w-50">
-                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="tb_SearchBox">
-                        
+                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="tb_SearchBox">
+
                         <div class="input-group-btn">
                             <button class="btn btn-success" type="submit" id="btn_Search" onclick="btn_Search_Click()">Search</button>
                         </div>
@@ -68,7 +68,10 @@
                         }
                         if (User.IsInRole("user"))
                         {
-                            <li>@Html.ActionLink("Cart", "Index", "Cart", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>
+                                @Html.ActionLink(" ", "Index", "Cart", new { area = "" }, new { @class = "glyphicon glyphicon-shopping-cart navbar-brand", title = "Cart" })
+
+                            </li>
                         }
 
                         <li class="dropdown">
@@ -124,7 +127,7 @@
                 })
 
             }
-            
+
 
         }
     </script>

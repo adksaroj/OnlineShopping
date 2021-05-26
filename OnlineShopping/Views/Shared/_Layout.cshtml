@@ -14,86 +14,93 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <i class="glyphicon glyphicon-shopping-cart navbar-brand"></i>
-                <a class="navbar-brand" href="#">Online Shopping</a>
+                <a class="navbar-brand" href="/">Online Shopping</a>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Electronics<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="Product">Product</a></li>
-                        <li><a href="#">Item 1-2</a></li>
-                        <li><a href="#">Item 1-3</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Computing<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Item 1-1</a></li>
-                        <li><a href="#">Item 1-2</a></li>
-                        <li><a href="#">Item 1-3</a></li>
-                    </ul>
-                </li>
-                <li>@Html.ActionLink("Products", "Grid", "Product", new { area = "" }, new { @class = "" })</li>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Electronics<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Product">Product</a></li>
+                            <li><a href="#">Item 1-2</a></li>
+                            <li><a href="#">Item 1-3</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Computing<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Item 1-1</a></li>
+                            <li><a href="#">Item 1-2</a></li>
+                            <li><a href="#">Item 1-3</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Products", "Grid", "Product", new { area = "" }, new { @class = "" })</li>
 
 
-                <li class="navbar-form" role="search">
-                    <div class="input-group w-50">
-                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="tb_SearchBox">
+                    <li class="navbar-form" role="search">
+                        <div class="input-group w-50">
+                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="tb_SearchBox">
 
-                        <div class="input-group-btn">
-                            <button class="btn btn-success" type="submit" id="btn_Search" onclick="btn_Search_Click()">Search</button>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success" type="submit" id="btn_Search" onclick="btn_Search_Click()">Search</button>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
 
-            </ul>
+                </ul>
 
 
-            <ul class="nav navbar-nav navbar-right">
-                @{
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        if (User.IsInRole("admin"))
+                <ul class="nav navbar-nav navbar-right">
+                    @{
+                        if (User.Identity.IsAuthenticated)
                         {
+                            if (User.IsInRole("admin"))
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/Product">Products</a></li>
+                                        <li><a href="#">Users</a></li>
+                                        <li><a href="#">Item 1-3</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            if (User.IsInRole("user"))
+                            {
+                                <li>
+                                    @Html.ActionLink(" ", "Index", "Cart", new { area = "" }, new { @class = "glyphicon glyphicon-shopping-cart navbar-brand", title = "Cart" })
+
+                                </li>
+                            }
+
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="~/Product">Products</a></li>
-                                    <li><a href="#">Users</a></li>
-                                    <li><a href="#">Item 1-3</a></li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi @User.Identity.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu navbar-inverse">
+                                    <li class="active dropdown-item">@Html.ActionLink("Sign Out", "SignOut", "Account", new { area = "" }, new { @class = "active dropdown-item" })</li>
+
                                 </ul>
                             </li>
                         }
-                        if (User.IsInRole("user"))
+                        else
                         {
-                            <li>
-                                @Html.ActionLink(" ", "Index", "Cart", new { area = "" }, new { @class = "glyphicon glyphicon-shopping-cart navbar-brand", title = "Cart" })
+                            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "navbar-brand" })
 
-                            </li>
+                            @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
+
                         }
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi @User.Identity.Name <span class="caret"></span></a>
-                            <ul class="dropdown-menu navbar-inverse">
-                                <li class="active dropdown-item">@Html.ActionLink("Sign Out", "SignOut", "Account", new { area = "" }, new { @class = "active dropdown-item" })</li>
-
-                            </ul>
-                        </li>
                     }
-                    else
-                    {
-                        @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "navbar-brand" })
-
-                        @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
-
-                    }
-                }
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
-
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -75,9 +75,12 @@
             <td></td>
             <td>
                 <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                    @if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                    }
                     @Html.ActionLink("Back to List", "Grid", null, htmlAttributes: new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Add to Cart", "AddToCart", "Cart", new { id = Model.Id}, htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Add to Cart", "AddToCart", "Cart", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
 
                 </p>
             </td>

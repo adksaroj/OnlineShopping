@@ -64,6 +64,7 @@ namespace OnlineShopping.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ("admin"))]
         public ActionResult Add(ProductViewModel product)
         {
             if (ModelState.IsValid)
@@ -119,6 +120,7 @@ namespace OnlineShopping.Controllers
             }
         }
 
+        [Authorize(Roles = ("admin"))]
         public ActionResult Edit(int id)
         {
             using (OnlineShoppingEntities dbContext = new OnlineShoppingEntities())
@@ -140,6 +142,7 @@ namespace OnlineShopping.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ("admin"))]
         public ActionResult Edit(ProductViewModel product)
         {
             if (ModelState.IsValid)
@@ -189,6 +192,8 @@ namespace OnlineShopping.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Redirects to previous list view</returns>
+
+        [Authorize(Roles = ("admin"))]
         public ActionResult Delete(int id)
         {
             using (OnlineShoppingEntities dbContext = new OnlineShoppingEntities())

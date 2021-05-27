@@ -75,7 +75,7 @@
                             }
                             if (User.IsInRole("user"))
                             {
-                                <li>
+                                <li style="display: block">
                                     @Html.ActionLink(" ", "Index", "Cart", new { area = "" }, new { @class = "glyphicon glyphicon-shopping-cart navbar-brand", title = "Cart" })
 
                                 </li>
@@ -91,10 +91,12 @@
                         }
                         else
                         {
-                            @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "navbar-brand" })
-
-                            @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
-
+                            <li>
+                                @Html.ActionLink("Sign Up", "SignUp", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                            </li>
                         }
                     }
                 </ul>

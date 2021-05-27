@@ -79,6 +79,22 @@ namespace OnlineShopping.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Remove(int id)
+        {
+            //get all products on cart from session storage
+            var allCartData = (List<CartViewModel>)Session["cart"];
+
+
+            //remove only those items with matching product and user ids
+            allCartData.RemoveAll(cvm => cvm.product.Id == id && cvm.user.Email == User.Identity.Name);
+
+            //update session storage new list
+            Session["cart"] = allCartData;
+
+            return RedirectToAction("Index");
+        }
+
+        
         protected List<CartViewModel> GetCartItemForUser()
         {
             var cartData = Session["cart"];

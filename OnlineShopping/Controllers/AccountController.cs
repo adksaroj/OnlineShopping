@@ -16,7 +16,7 @@ namespace OnlineShopping.Controllers
         public ActionResult Login()
         {
             ViewBag.Error = "No Error";
-            if(Session["userId"] !=null)
+            if(User.Identity.IsAuthenticated)
                 return RedirectToAction("index", "home");
 
             return View();

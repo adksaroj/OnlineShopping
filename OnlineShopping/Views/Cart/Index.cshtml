@@ -1,7 +1,7 @@
 ﻿@model List<OnlineShopping.Models.CartViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cart";
 }
 <br />
 
@@ -75,5 +75,6 @@
 }
 else
 {
-    <h1 class="text-center text-danger" id="cartSummary">Cart is Empty</h1>
+    <h1 class="text-center text-danger" id="cartSummary">Cart is empty</h1>
+    <p align="center"> <a class="text-center btn btn-success" href="~/product/grid">Browse Products</a></p>
 }

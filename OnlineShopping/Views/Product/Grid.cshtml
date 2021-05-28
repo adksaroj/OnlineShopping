@@ -24,7 +24,7 @@
                 <h3>
                     @Html.ActionLink(item.ProductName, "details", new { id = item.Id }, htmlAttributes: new { @class = "h3 text-success" })
                 </h3>
-                <p>
+                <p class="text-justify">
                     @Html.DisplayFor(modelItem => item.Description)
                 <p>
                     @if (User.IsInRole("admin"))

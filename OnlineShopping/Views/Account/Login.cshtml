@@ -8,7 +8,7 @@
 
 <div id="login-div" class="h-100">
     <div class="h-100 justify-content-center align-items-center">
-        @using (Html.BeginForm("login", "account", FormMethod.Post))
+        @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 

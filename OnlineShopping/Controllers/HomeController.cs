@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace OnlineShopping.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home

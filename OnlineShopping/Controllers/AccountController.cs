@@ -13,18 +13,22 @@ namespace OnlineShopping.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.Error = "No Error";
             if(User.Identity.IsAuthenticated)
                 return RedirectToAction("index", "home");
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+            }
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -37,7 +41,15 @@ namespace OnlineShopping.Controllers
                     else
                     {
                         FormsAuthentication.SetAuthCookie(model.Email, false);
-                        return RedirectToAction("index", "home");
+                        if (returnUrl != "" && returnUrl != null)
+                        {
+                            if (Url.IsLocalUrl(returnUrl))
+                                return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("index", "home");
+                        }
                     }
                 }
 

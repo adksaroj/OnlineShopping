@@ -55,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.product.Cost)
                 </td>
                 <td>
-                    <a title="Remove from Cart" , class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Remove", new { id = item.product.Id })"></a>
+                    <a title="Remove from Cart" , class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("remove", new { id = item.product.Id })"></a>
                 </td>
             </tr>
         }

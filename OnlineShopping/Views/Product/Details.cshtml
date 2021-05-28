@@ -77,10 +77,10 @@
                 <p>
                     @if (User.IsInRole("admin"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Edit", "edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
                     }
-                    @Html.ActionLink("Back to List", "Grid", null, htmlAttributes: new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Add to Cart", "AddToCart", "Cart", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Back to List", "grid", null, htmlAttributes: new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Add to Cart", "addtocart", "cart", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
 
                 </p>
             </td>

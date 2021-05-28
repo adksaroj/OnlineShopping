@@ -48,7 +48,7 @@
                     </td>
 
                     <td>
-                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "col-xs-3" } })
+                        @Html.EditorFor(modelItem => item.Quantity, new { htmlAttributes = new { @class = "form-control", id = "cart-quantity-input" } })
                         @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
                     </td>
 

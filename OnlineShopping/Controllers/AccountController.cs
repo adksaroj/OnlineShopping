@@ -17,7 +17,7 @@ namespace OnlineShopping.Controllers
         {
             ViewBag.Error = "No Error";
             if(Session["userId"] !=null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("index", "home");
 
             return View();
         }
@@ -37,7 +37,7 @@ namespace OnlineShopping.Controllers
                     else
                     {
                         FormsAuthentication.SetAuthCookie(model.Email, false);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("index", "home");
                     }
                 }
 
@@ -68,7 +68,7 @@ namespace OnlineShopping.Controllers
                     dbContext.Users.Add(user);
                     dbContext.SaveChanges();
 
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("login", "account");
                 }
 
             }
@@ -78,7 +78,7 @@ namespace OnlineShopping.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("login", "account");
         }
     }
 }

@@ -201,7 +201,7 @@ namespace OnlineShopping.Controllers
                 Products prod = dbContext.Products.Where(p => p.Id == id).FirstOrDefault();
                 dbContext.Products.Remove(prod);
                 dbContext.SaveChanges();
-                return RedirectToAction("Grid");
+                return RedirectToAction("grid");
             }
         }
     }

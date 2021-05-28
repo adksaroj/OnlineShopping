@@ -76,7 +76,7 @@ namespace OnlineShopping.Controllers
                 Session["cart"] = cartList;
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("index");
         }
 
         public ActionResult Remove(int id)
@@ -91,7 +91,7 @@ namespace OnlineShopping.Controllers
             //update session storage new list
             Session["cart"] = allCartData;
 
-            return RedirectToAction("Index");
+            return RedirectToAction("index");
         }
 
         

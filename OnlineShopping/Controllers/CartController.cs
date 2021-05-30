@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OnlineShopping.Utilities;
 
 namespace OnlineShopping.Controllers
 {
@@ -14,14 +15,14 @@ namespace OnlineShopping.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            var cartItemsForUser = GetCartItemForUser();
+            var cartItemsForUser = CartUtility.GetCartItemForUser(User.Identity.Name);
             return View(cartItemsForUser);
         }
 
         //[HttpPost]
         public ActionResult AddToCart(int id)
         {
-            var cartData = GetCartItemForUser();
+            var cartData = CartUtility.GetCartItemForUser(User.Identity.Name);
 
             var dbProd = new Products();
 
@@ -50,7 +51,7 @@ namespace OnlineShopping.Controllers
             //return Json("Could not add product");
             else if (dbProd.Id != 0 && cartData != null)
             {
-                if(IsProductAlreadyOnCart(dbProd))
+                if(CartUtility.IsProductAlreadyOnCart(dbProd, User.Identity.Name)) //User.Identity.Name = emailId
                 {
                     //find the product existing on cart and increment its quantity
                     cartData.Find(cvm => cvm.product.Id == dbProd.Id).Quantity++;
@@ -67,7 +68,7 @@ namespace OnlineShopping.Controllers
                 var cartList = new List<CartViewModel>();
                 newCart.product = dbProd;
 
-                if (IsProductAlreadyOnCart(dbProd))
+                if (CartUtility.IsProductAlreadyOnCart(dbProd, User.Identity.Name)) //User.Identity.Name = emailId
                 {
                     newCart.Quantity++;
                 }
@@ -92,32 +93,6 @@ namespace OnlineShopping.Controllers
             Session["cart"] = allCartData;
 
             return RedirectToAction("index");
-        }
-
-        
-        protected List<CartViewModel> GetCartItemForUser()
-        {
-            var cartData = Session["cart"];
-
-            var allCart = (List<CartViewModel>)cartData;
-
-            var cartItemsForUser = allCart?.Where(cvm => cvm.user.Email == User.Identity.Name).ToList();
-
-            return cartItemsForUser;
-        }
-
-        protected bool IsProductAlreadyOnCart(Products product)
-        {
-            var userCart = GetCartItemForUser();
-
-            var productFromCart = userCart?.Where(cvm => cvm.product.Id == product.Id).FirstOrDefault();
-
-            if(productFromCart != null)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

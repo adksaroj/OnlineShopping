@@ -61,6 +61,7 @@
     <Build Include="Users.sql" />
     <Build Include="Products.sql" />
     <Build Include="Orders.sql" />
+    <Build Include="Roles.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OnlineShoppingDB.refactorlog" />

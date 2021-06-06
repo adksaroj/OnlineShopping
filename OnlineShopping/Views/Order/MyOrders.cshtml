@@ -1,0 +1,46 @@
+﻿@model List<OnlineShopping.Models.OrderViewModel>
+
+@{
+    ViewBag.Title = "My Orders";
+}
+
+<h2>MyOrders</h2>
+
+@if (Model.Count >= 0)
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(m => m[0].OrderId)</th>
+                <th>@Html.LabelFor(m => m[0].Products[0].ProductName)</th>
+                <th>@Html.LabelFor(m => m[0].Products[0].Quantity)</th>
+                <th>@Html.LabelFor(m => m[0].Products[0].Cost)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <th>@Html.DisplayFor(oderVm => order.OrderId)</th>
+                    <td>@Html.DisplayFor(oderVm => order.Products[0].ProductName)</td>
+                    <td>@Html.DisplayFor(oderVm => order.Products[0].Quantity)</td>
+                    <td>@Html.DisplayFor(oderVm => order.OrderTotal)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.LabelFor(orderVm => order.PaymentMode)</td>
+                    <td>@Html.DisplayFor(orderVm => order.PaymentMode)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.LabelFor(orderVm => order.OrderAddress)</td>
+                    <td>@Html.DisplayFor(orderVm => order.OrderAddress)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>No Orders</h2>
+}

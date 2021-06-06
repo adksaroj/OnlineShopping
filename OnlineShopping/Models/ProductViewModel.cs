@@ -11,7 +11,7 @@ namespace OnlineShopping.Models
         public int Id { get; set; }
 
         [Display(Name = "Product ID")]
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Product ID is required")]
         [DataType(DataType.Text)]
         public string ProductId { get; set; }
 
@@ -33,5 +33,8 @@ namespace OnlineShopping.Models
         [Required(ErrorMessage = "Description is required")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Quantity is required")]
+        public int Quantity { get; set; }
     }
 }

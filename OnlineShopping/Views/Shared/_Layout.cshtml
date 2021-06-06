@@ -92,9 +92,9 @@
 
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi @User.Identity.Name <span class="caret"></span></a>
-                                <ul class="dropdown-menu navbar-inverse">
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item">@Html.ActionLink("My Orders", "myorders", "order")</li>
                                     <li class="active dropdown-item">@Html.ActionLink("Sign Out", "signout", "account", new { area = "" }, new { @class = "active dropdown-item" })</li>
-
                                 </ul>
                             </li>
                         }

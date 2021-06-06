@@ -156,6 +156,7 @@
     <Compile Include="Models\CartViewModel.cs" />
     <Compile Include="Models\CheckoutVM.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -188,6 +189,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\MyOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

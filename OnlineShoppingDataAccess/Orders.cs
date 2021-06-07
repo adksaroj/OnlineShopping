@@ -14,6 +14,12 @@ namespace OnlineShoppingDataAccess
     
     public partial class Orders
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Orders()
+        {
+            this.Products = new HashSet<Products>();
+        }
+    
         public int Id { get; set; }
         public int ClientId { get; set; }
         public int ProductId { get; set; }
@@ -22,7 +28,8 @@ namespace OnlineShoppingDataAccess
         public Nullable<System.DateTime> Date { get; set; }
         public string OrderStatus { get; set; }
     
-        public virtual Products Products { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

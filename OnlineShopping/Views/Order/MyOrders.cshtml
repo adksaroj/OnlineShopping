@@ -20,23 +20,38 @@
         <tbody>
             @foreach (var order in Model)
             {
+                int productCount = 0;
                 <tr>
-                    <th>@Html.DisplayFor(oderVm => order.OrderId)</th>
-                    <td>@Html.DisplayFor(oderVm => order.Products[0].ProductName)</td>
-                    <td>@Html.DisplayFor(oderVm => order.Products[0].Quantity)</td>
-                    <td>@Html.DisplayFor(oderVm => order.OrderTotal)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>@Html.LabelFor(orderVm => order.PaymentMode)</td>
-                    <td>@Html.DisplayFor(orderVm => order.PaymentMode)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>@Html.LabelFor(orderVm => order.OrderAddress)</td>
-                    <td>@Html.DisplayFor(orderVm => order.OrderAddress)</td>
-                </tr>
-            }
+                    <td>@Html.DisplayFor(oderVm => order.OrderId)</td>
+                    @foreach (var product in order.Products)
+                    {
+                        productCount++;
+                        var productCost = Math.Round(product.Cost, 2);
+                        if (productCount > 1)
+                        {
+                            <td></td>
+                        }
+                        <td>@Html.DisplayFor(oderVm => product.ProductName)</td>
+                        <td>@Html.DisplayFor(oderVm => product.Quantity)</td>
+                        <td>@Html.DisplayFor(oderVm => productCost)</td>
+                        if (productCount < order.Products.Count)
+                        {
+                            <tr></tr>
+                        }
+                    }
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.LabelFor(orderVm => order.PaymentMode)</td>
+                        <td>@Html.DisplayFor(orderVm => order.PaymentMode)</td>
+                        <td>@Html.DisplayFor(orderVm => order.OrderTotal)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.LabelFor(orderVm => order.OrderAddress)</td>
+                        <td>@Html.DisplayFor(orderVm => order.OrderAddress)</td>
+                    </tr>
+                }
         </tbody>
     </table>
 }

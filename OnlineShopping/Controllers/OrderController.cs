@@ -38,23 +38,40 @@ namespace OnlineShopping.Controllers
                     foreach (var order in orders)
                     {
                         OrderViewModel orderVM = new OrderViewModel();
-                        ProductViewModel pvm = new ProductViewModel();
+                        List<ProductViewModel> productListVM = new List<ProductViewModel>();
 
-                        pvm.Id = order.Products.Id;
-                        pvm.ProductId = order.Products.ProductId;
-                        pvm.ProductName = order.Products.ProductName;
-                        pvm.Category = order.Products.Category;
-                        pvm.Description = order.Products.Description;
-                        pvm.Quantity = (int)order.Quantity;
+                        if (order.Products != null)
+                        {
+                            foreach (var product in order.Products)
+                            {
+                                ProductViewModel productView = new ProductViewModel();
+                                productView.Id = product.Id;
+                                productView.ProductId = product.ProductId;
+                                productView.ProductName = product.ProductName;
+                                productView.Category = product.Category;
+                                productView.Description = product.Description;
+                                productView.Cost = (decimal)product.Cost;
+                                //Math.Round(productView.Cost, 2);
+                                productListVM.Add(productView);
+                            }
+                        }
+
+                        //pvm.Id = order.Products.Id;
+                        //pvm.ProductId = order.Products.ProductId;
+                        //pvm.ProductName = order.Products.ProductName;
+                        //pvm.Category = order.Products.Category;
+                        //pvm.Description = order.Products.Description;
+                        //pvm.Quantity = (int)order.Quantity;
 
                         List<ProductViewModel> productsForOrder = new List<ProductViewModel>();
-                        productsForOrder.Add(pvm);
+                        productsForOrder.AddRange(productListVM);
 
                         orderVM.OrderId = order.Id;
                         orderVM.Products = productsForOrder;
                         orderVM.OrderTotal = (decimal)order.Price;
                         orderVM.PaymentMode = "Cash on Delivery";
                         orderVM.OrderAddress = order.Users.Address;
+                        orderVM.Products = productsForOrder;
 
                         ordersListVM.Add(orderVM);
 

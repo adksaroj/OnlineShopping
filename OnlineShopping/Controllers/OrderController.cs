@@ -51,7 +51,7 @@ namespace OnlineShopping.Controllers
                                 productView.Category = product.Category;
                                 productView.Description = product.Description;
                                 productView.Cost = (decimal)product.Cost;
-                                //Math.Round(productView.Cost, 2);
+                                productView.Quantity = (int)order.Quantity;
                                 productListVM.Add(productView);
                             }
                         }
@@ -72,6 +72,7 @@ namespace OnlineShopping.Controllers
                         orderVM.PaymentMode = "Cash on Delivery";
                         orderVM.OrderAddress = order.Users.Address;
                         orderVM.Products = productsForOrder;
+                        orderVM.OrderStatus = order.OrderStatus;
 
                         ordersListVM.Add(orderVM);
 

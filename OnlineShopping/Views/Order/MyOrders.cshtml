@@ -36,9 +36,9 @@
                         <td>@Html.DisplayFor(oderVm => productCost)</td>
                         if (productCount < order.Products.Count)
                         {
-                            <tr></tr>
-                        }
+                        <tr></tr>
                     }
+                }
                     </tr>
                     <tr>
                         <td></td>
@@ -50,6 +50,13 @@
                         <td></td>
                         <td>@Html.LabelFor(orderVm => order.OrderAddress)</td>
                         <td>@Html.DisplayFor(orderVm => order.OrderAddress)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.LabelFor(orderVm => order.OrderStatus)</td>
+                        <td class="text-primary">@Html.DisplayFor(orderVm => order.OrderStatus)</td>
+                        <td></td>
                     </tr>
                 }
         </tbody>

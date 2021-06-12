@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OnlineShoppingDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartProducts">
+          <Key>
+            <PropertyRef Name="CartId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="CartId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -56,6 +71,30 @@
           <Property Name="Role" Type="nvarchar" MaxLength="10" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CartProducts_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CartProducts">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderItem_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
@@ -105,11 +144,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OnlineShoppingDbModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartProducts" EntityType="Self.CartProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CartProducts_Cart" Association="Self.FK_CartProducts_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartProducts_Products" Association="Self.FK_CartProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CartProducts" EntitySet="CartProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Orders" Association="Self.FK_OrderItem_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderItems" EntitySet="OrderItems" />
@@ -187,6 +236,11 @@
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="Cart" EntityType="OnlineShoppingDbModel.Cart" />
+          <AssociationSet Name="CartProducts" Association="OnlineShoppingDbModel.CartProducts">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Roles">
           <Key>
@@ -221,9 +275,22 @@
           <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="OnlineShoppingDbModel.OrderItems" FromRole="Products" ToRole="Orders" />
+          <NavigationProperty Name="Cart" Relationship="OnlineShoppingDbModel.CartProducts" FromRole="Products" ToRole="Cart" />
         </EntityType>
         <Association Name="OrderItems">
           <End Type="OnlineShoppingDbModel.Orders" Role="Orders" Multiplicity="*" />
+          <End Type="OnlineShoppingDbModel.Products" Role="Products" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="OnlineShoppingDbModel.CartProducts" FromRole="Cart" ToRole="Products" />
+        </EntityType>
+        <Association Name="CartProducts">
+          <End Type="OnlineShoppingDbModel.Cart" Role="Cart" Multiplicity="*" />
           <End Type="OnlineShoppingDbModel.Products" Role="Products" Multiplicity="*" />
         </Association>
       </Schema>
@@ -285,6 +352,22 @@
             </EndProperty>
             <EndProperty Name="Orders">
               <ScalarProperty Name="Id" ColumnName="OrderId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="OnlineShoppingDbModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CartProducts" TypeName="OnlineShoppingDbModel.CartProducts" StoreEntitySet="CartProducts">
+            <EndProperty Name="Products">
+              <ScalarProperty Name="Id" ColumnName="ProductId" />
+            </EndProperty>
+            <EndProperty Name="Cart">
+              <ScalarProperty Name="Id" ColumnName="CartId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

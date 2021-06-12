@@ -12,6 +12,12 @@
         <AssociationConnector Association="OnlineShoppingDbModel.FK_Roles_Users" />
         <EntityTypeShape EntityType="OnlineShoppingDbModel.Products" Width="1.5" PointX="5.25" PointY="1.125" />
         <AssociationConnector Association="OnlineShoppingDbModel.OrderItems" />
+        <EntityTypeShape EntityType="OnlineShoppingDbModel.Cart" Width="1.5" PointX="7.5" PointY="3.5" />
+        <AssociationConnector Association="OnlineShoppingDbModel.FK_CartProductId" />
+        <AssociationConnector Association="OnlineShoppingDbModel.FK_CartUserId" />
+        <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
+        <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
+        <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,8 +1,6 @@
 ﻿CREATE TABLE [dbo].[Cart]
 (
+	[Id] INT NOT NULL,
 	[UserId] INT NOT NULL, 
-    [ProductId] INT NOT NULL,
-	CONSTRAINT PK_CartUserId PRIMARY KEY ([UserId]),
-	CONSTRAINT FK_CartUserId FOREIGN KEY ([UserId]) REFERENCES Users(Id),
-	CONSTRAINT FK_CartProductId FOREIGN KEY ([ProductId]) REFERENCES Products(Id)
+	CONSTRAINT PK_CartUserId PRIMARY KEY ([Id]),
 )

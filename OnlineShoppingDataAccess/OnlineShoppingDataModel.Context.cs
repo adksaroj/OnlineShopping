@@ -29,5 +29,6 @@ namespace OnlineShoppingDataAccess
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Cart> Cart { get; set; }
     }
 }

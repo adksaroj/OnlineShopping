@@ -68,4 +68,7 @@
   <ItemGroup>
     <None Include="OnlineShoppingDB.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment.GrantDbPermission.sql" />
+  </ItemGroup>
 </Project>

@@ -18,11 +18,35 @@ namespace OnlineShopping.Controllers
             return View();
         }
 
+
+
         [HttpPost]
-        [ChildActionOnly]
-        public ActionResult Create()
+        //[ChildActionOnly]
+        public ActionResult Create(CheckoutVM checkout)
         {
-            return RedirectToAction("myorders");
+            if (ModelState.IsValid)
+            {
+                using (OnlineShoppingEntities dbContext = new OnlineShoppingEntities())
+                {
+                    if (checkout.Cart != null)
+                    {
+                        var order = new Orders();
+                        order.Id = UserUtility.GetUserByUserId(User.Identity.Name).Id;
+                        order.Quantity = 1;
+                        order.Date = DateTime.Now;
+                        order.OrderStatus = "Ordered";
+                        order.Price = checkout.OrderTotal;
+
+                        dbContext.Orders.Add(order);
+                        dbContext.SaveChanges();
+                    }
+                }
+                return RedirectToAction("myorders");
+
+            }
+
+
+            return RedirectToAction("checkout");
         }
 
         public ActionResult MyOrders()

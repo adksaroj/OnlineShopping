@@ -25,5 +25,10 @@ namespace OnlineShopping.Models
         [Required]
         [Display(Name = "Order Total")]
         public decimal OrderTotal { get; set; }
+
+        public CheckoutVM()
+        {
+            Cart = new List<CartViewModel>();
+        }
     }
 }

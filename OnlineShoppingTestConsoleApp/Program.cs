@@ -13,7 +13,10 @@ namespace OnlineShoppingTestConsoleApp
         {
             Console.WriteLine("Starting Operation...");
 
+            using (OnlineShoppingEntities dbContext = new OnlineShoppingEntities())
+            {
 
+            }
 
             Console.WriteLine("Completed...");
             Console.ReadKey();

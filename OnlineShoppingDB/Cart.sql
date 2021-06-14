@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Cart]
 (
-	[Id] INT NOT NULL,
+	[Id] INT NOT NULL IDENTITY,
 	[UserId] INT NOT NULL, 
 	CONSTRAINT PK_CartUserId PRIMARY KEY ([Id]),
 )

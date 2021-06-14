@@ -16,9 +16,7 @@
         <AssociationConnector Association="OnlineShoppingDbModel.FK_CartProductId" />
         <AssociationConnector Association="OnlineShoppingDbModel.FK_CartUserId" />
         <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
-        <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
-        <AssociationConnector Association="OnlineShoppingDbModel.CartProducts" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
